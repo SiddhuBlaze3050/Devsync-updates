@@ -25,6 +25,6 @@ jobs:
           git add update.log
           # Commit if there are changes; exit if nothing to commit (hence || exit 0)
           git commit -m "Daily update: $(date -u) [skip ci]" || exit 0
-          git push
-        env: 
-          GITHUB_TOKEN: ${{ secrets.PAT }}
+          git push https://SiddhuBlaze3050:${{ secrets.PAT }}@github.com/SiddhuBlaze3050/Devsync-updates.git
+        env:
+          PAT: ${{ secrets.PAT }}
