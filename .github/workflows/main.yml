@@ -3,7 +3,7 @@ name: Daily Repository Update
 on:
   schedule:
     # This schedule uses specific hours and minutes (e.g., every day at 14:30 UTC)
-    - cron: "00 6 * * *"
+    - cron: "15 6 * * *"
   workflow_dispatch:  # Optional for manual triggering
 
 jobs:
@@ -26,3 +26,5 @@ jobs:
           # Commit if there are changes; exit if nothing to commit (hence || exit 0)
           git commit -m "Daily update: $(date -u) [skip ci]" || exit 0
           git push
+        env: 
+          GITHUB_TOKEN: ${{ secrets.PAT }}
