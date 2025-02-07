@@ -1,0 +1,28 @@
+name: Daily Repository Update
+
+on:
+  schedule:
+    # This schedule uses specific hours and minutes (e.g., every day at 14:30 UTC)
+    - cron: "30 14 * * *"
+  workflow_dispatch:  # Optional for manual triggering
+
+jobs:
+  update-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository (with email 21f2000579@ds.study.iitm.ac.in)
+        uses: actions/checkout@v4
+
+      - name: Make an update (21f2000579@ds.study.iitm.ac.in)
+        run: |
+          # Append a timestamp to a status file (or update any file)
+          echo "Daily update at $(date -u)" >> update.log
+
+      - name: Commit and push changes (21f2000579@ds.study.iitm.ac.in)
+        run: |
+          git config --local user.email "21f2000579@ds.study.iitm.ac.in"
+          git config --local user.name "Devsync-updates"
+          git add update.log
+          # Commit if there are changes; exit if nothing to commit (hence || exit 0)
+          git commit -m "Daily update: $(date -u) [skip ci]" || exit 0
+          git push
